@@ -1,3 +1,4 @@
+// Лучше всё же использовать css переменные, раз уж оно реализовано
 $background-color: #eee;
 $main-color: #fff;
 $opposite-color: #333;
@@ -8,6 +9,7 @@ $category-gap: 8px;
 $first-font: 'Montserrat', Arial, sans-serif;
 $second-font: "NotoSans", Arial, sans-serif;
 
+// Между назанием класса и { нужен пробел
 .layout{
     box-sizing: border-box;
 }
@@ -23,21 +25,24 @@ $second-font: "NotoSans", Arial, sans-serif;
     font-style: italic;
 }
 
+// Не стоит добавлять стили Для body кроме стилей нормализации, вместо этого можно задать эти стили для layout
 body{
     background-color: $background-color;
-    margin: 0px;
+    margin: 0px; // Если значение любого свойства =0, то можно не писать единицы измерения
 
-    min-height: 2000px;
+    min-height: 2000px; // Не-не, так ограничивать сайт точно не надо, у тебя может быть оочень мало контента на сайте, но из-за этого появится горизонтальный скрол и будет пустое место
 }
 
 
+// Не используешь возможности scss, почитай про вложеность
+//https://sass-lang.com/documentation/style-rules/declarations#nesting
 .news__photo-shadow{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, #00000000, #000000a0);
+    background: linear-gradient(180deg, #000000, #000000);
 }
 
 .news__info{
@@ -53,12 +58,16 @@ body{
     position: absolute;
     bottom: 10px;
     left: 10px;
+  // Не стоит юзать слишком большие значения без надобности, сам запутаешься.
+  // у тебя нет в проекте значения 2, а сразу 10 его
     z-index: 10;
     margin: 10px;
 
 
     color: $other-color;
     font-family: $first-font;
+  // font-size тоже можно вынести в класс или в миксин, например font-size:12px - будет соответствовать
+  // классу/миксину text-size_small и тд
     font-size: 12px;
 }
 
@@ -97,10 +106,11 @@ body{
     bottom: 0;
     z-index: 1;
 }
+// Так много переносов строк не надо, 1 достаточно
 
 
 
-
+ // обсуждали сегодня (27.10) на уроке, не стоит повышать специфичность класса
 .news-list__item + .news-list__item:after{
     content: "";
     position: absolute;
@@ -165,7 +175,7 @@ body{
     font-family: $first-font;
     font-weight: 700;
     color: $other-color-2;
-    font-weight: 16px;
+    font-weight: 16px; // Я так понимаю, тут должно быть font-size?
 }
 
 
@@ -180,15 +190,15 @@ body{
     width: 0;
 }
 
-.category-types-item__link { 
-    text-decoration: none; 
-    
+.category-types-item__link {
+    text-decoration: none; // Это свойство используется 5 раз, хотя ты задал тегу а это свойство, соответственно в других местах оно не нужно
+
 }
 
 .category-types-item__title{
     font-family: $first-font;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 15px; //как правило, font-size принимает чётные значения, 12px,14px,.... Ошибки нет, но всё же стоит иметь ввиду
     white-space: nowrap;
     color: #000;
 }
@@ -228,9 +238,12 @@ body{
     display: block;
     width: 195.55px;
     height: 110px;
-    
-    
 
+
+  // Не стоит задавать стили тегу напрямую, за исключением случаев, когда ты хочешь задать свойства для селектора на всём сайте.
+  // К примеру, тебе важно, чтобы все картинки на сайте имели границу по бокам, тогда можешь задать свойство тегу img, и эне исключено, что это приведет к проблемам
+  // Плюс такая запись повышает специфичность
+  // Юзай класс в данном случае
     img{
         width: 100%;
         height: 100%;
@@ -313,7 +326,7 @@ body{
 }
 
 
-a{
+a{ // Хороший пример применения стилей к тегу
     cursor: pointer;
     text-decoration: none;
 }
@@ -323,7 +336,7 @@ a{
     bottom: -100%;
     right: 0;
     left: 0;
-    z-index: 900;
+    z-index: 900; // Один из вариантов, когда огромный z-index оправдан
 }
 
 .widgets__news-tape{
@@ -334,7 +347,7 @@ a{
 
     background-color: $main-color;
 
-    
+
 }
 
 .widgets__news-tape:before{
@@ -345,6 +358,8 @@ a{
     left: 0;
     right: 0;
     height: 41px;
+  //https://caniuse.com/?search=linear-gradient
+  // linear-gradient поддерживается всеми современными браузерами, нет смысла писать с префиксами
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(60.77%, rgba(0, 0, 0, 0.05)), color-stop(86.19%, rgba(0, 0, 0, 0.09)), to(rgba(0, 0, 0, 0.18)));
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 60.77%, rgba(0, 0, 0, 0.09) 86.19%, rgba(0, 0, 0, 0.18) 100%);
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 60.77%, rgba(0, 0, 0, 0.09) 86.19%, rgba(0, 0, 0, 0.18) 100%);
@@ -414,6 +429,8 @@ a{
     left: 0;
     top: 0;
     z-index: 700;
+  // Нет, тут нет смысла в огромном интексе, нет необходимости в том, чтобы nav всегда был наверху (по оси z)
+
 
     width: 100%;
     background-color: $main-color;
@@ -447,7 +464,7 @@ a{
     color: #000;
 }
 
-.nav__menu{   
+.nav__menu{
     img{
         margin: 5px;
         width: 40px;
@@ -501,7 +518,7 @@ a{
 .author-list__new-photo{
     display: block;
     width: 30%;
-    
+
 
     img{
         width: 100%;
@@ -591,7 +608,7 @@ a{
         height: 46px;
     }
 
-    .nav__link{   
+    .nav__link{
         img{
             margin-left: 10px;
             position: absolute;
@@ -643,7 +660,7 @@ a{
 
     .news__photo{
         height: 295px;
-    
+
         img{
             width: 100%;
             height: 100%;
@@ -654,12 +671,12 @@ a{
     .news__news-list{
         margin-top: 10px;
     }
-    
+
     .news-list{
         display: flex;
         flex-direction: column;
         margin: 0px 0px 10px;
-    
+
     }
 
     .author-list{
@@ -669,7 +686,7 @@ a{
     .news__author-list{
         margin-top: 10px;
     }
-    
+
 }
 
 @media screen and (min-width: 747px) {
@@ -681,7 +698,7 @@ a{
         height: 60px;
     }
 
-    .nav__link{   
+    .nav__link{
         img{
             margin-left: 10px;
             position: absolute;
