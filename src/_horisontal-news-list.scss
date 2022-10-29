@@ -1,8 +1,6 @@
 .horisontal-news-list {
     display: flex;
     flex-direction: row;
-    // https://ru.bem.info/methodology/quick-start/#%D0%B1%D0%BB%D0%BE%D0%BA
-    // Блок не должен влиять на свое окружение, т. е. блоку не следует задавать внешнюю геометрию (в виде отступов, границ, влияющих на размеры) и позиционирование.
     margin: 0px -5px;
     padding-left: 5px;
     overflow: scroll;
@@ -23,8 +21,6 @@
 
 .horisontal-news-list__new-photo {
     display: block;
-    // Не надо задавать значения в дробях (за исключением пары свойств), ибо некоторые браузеры могут по-разному округлять значения
-    // Юзай целочисленные
     width: 195.55px;
     height: 110px;
 
