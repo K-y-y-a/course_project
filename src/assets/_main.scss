@@ -1,7 +1,6 @@
 .main__category-types {
-    margin: 10px 0 -5px 5px;
+    margin: 10px 0 -5px 10px;
     display: flex;
-    overflow: scroll;
 }
 
 .main__footer {
@@ -13,9 +12,7 @@
 
 @media screen and (max-width: 746px) {
     .main__category {
-        margin: 56px 0 -5px 5px;
-        display: flex;
-        overflow: scroll;
+        margin: 0 0 10px 5px;
     }
 
     .main__news {
@@ -25,8 +22,7 @@
 
 @media screen and (min-width: 747px) {
     .main__category {
-        margin: 70px 0 10px 10px;
-        display: flex;
+        margin: 0 0 10px 10px;
     }
 
     .main__news {
@@ -48,7 +44,7 @@
         margin: 0 10px 10px 10px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
         grid-gap: 10px;
     }
 

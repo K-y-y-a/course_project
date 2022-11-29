@@ -121,6 +121,10 @@
     border-radius: 2px;
 }
 
+.news__horisontal-news-list-box{
+    position: relative;
+}
+
 @media screen and (max-width: 746px) {
     .news__main-new {
         height: 295px;
@@ -189,6 +193,11 @@
             height: 100%;
             background: linear-gradient(180deg, #00000000, #000000a0);
         }
+    }
+
+    .news__block {
+        display: flex;
+        flex-direction: column;
     }
 
     .news__block-3 {

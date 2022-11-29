@@ -1,0 +1,61 @@
+<template>
+    <div class="layout__search search">
+        <div class="search__line">
+            <input type="text" class="search__line-text" v-model="text" placeholder="Поиск" v-on:keyup.enter="submit"/>
+            <button class="search__line-button" v-on:click="clear">&#215;</button>
+        </div>
+           
+        <div class="search__search-list search-list">
+            <SearchList
+                v-for="neww in news"
+                :key="neww.id"
+                :neww="neww"
+            ></SearchList>
+        </div>
+
+        <div class="search__error" v-if="isEmpty">{{error}}</div>
+        
+    </div>
+</template>
+
+<script>
+    import SearchList from "/src/components/SearchList.vue"
+
+    import { mapGetters } from 'vuex'
+
+    export default {
+        components: {
+            SearchList
+        },
+        data () {
+            return {
+                text: "",
+                news: [],
+                isEmpty: false,
+                error: "К сожалению, по вашему запросу ничего не найдено",
+            }
+        },
+        methods: {
+            submit() {
+                this.GET_NEW_BY_TEXT(this.text)
+                console.log(this.GET_NEW_BY_TEXT(this.text))
+                this.news = this.GET_NEW_BY_TEXT(this.text)
+
+                if(this.news.length == 0) this.isEmpty = true
+                else this.isEmpty = false
+            },
+            getNew() {
+                return this.getNewById(this.$route.params.id);               
+            },
+        },
+        computed: {
+            ...mapGetters([
+                'GET_NEW_BY_TEXT'
+            ]),
+        },
+    }
+</script>
+
+<style scoped>
+
+</style>

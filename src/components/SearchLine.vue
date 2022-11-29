@@ -1,0 +1,1 @@
+<input type="text" name="query" class="search-query__input" value="fff" placeholder="Поиск"></input>
