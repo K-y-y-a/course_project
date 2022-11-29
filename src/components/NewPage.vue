@@ -42,7 +42,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import AuthorBoxLarge from "/src/components/AuthorBoxLarge.vue"
     import { mapGetters } from 'vuex'
 

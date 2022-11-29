@@ -17,7 +17,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import SearchList from "/src/components/SearchList.vue"
 
     import { mapGetters } from 'vuex'

@@ -14,7 +14,7 @@
     
         </router-link>
 
-        <router-link
+        <!-- <router-link
             :to="linkOpenAuthor"
             tag="button"
             class="author-list__author-link"
@@ -22,7 +22,13 @@
             <AuthorBox
                 :neww="neww"
             ></AuthorBox>
-        </router-link>
+        </router-link> -->
+
+        <div class="author-list__author-link">
+            <AuthorBox
+                :neww="neww"
+            ></AuthorBox>
+        </div>
 
         <div class="author-list__info">
             <div class="author-list__date text-size_small">{{getDate()}}</div>
@@ -31,7 +37,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import AuthorBox from "/src/components/AuthorBox.vue"
 
     export default {

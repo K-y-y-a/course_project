@@ -18,7 +18,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import SearchList from "/src/components/SearchList.vue"
 
     import { mapGetters } from 'vuex'
@@ -37,12 +37,14 @@
         },
         methods: {
             submit() {
-                this.GET_NEW_BY_TEXT(this.text)
-                console.log(this.GET_NEW_BY_TEXT(this.text))
-                this.news = this.GET_NEW_BY_TEXT(this.text)
+                this.GET_NEW_BY_TEXT(this.text);
+                this.news = this.GET_NEW_BY_TEXT(this.text);
 
                 if(this.news.length == 0) this.isEmpty = true
-                else this.isEmpty = false
+                else this.isEmpty = false;
+            },
+            clear() {
+                this.text = "";
             },
             getNew() {
                 return this.getNewById(this.$route.params.id);               

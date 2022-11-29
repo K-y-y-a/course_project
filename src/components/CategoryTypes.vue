@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import CategoryTypesItem from "/src/components/CategoryTypesItem.vue"
 
     export default {

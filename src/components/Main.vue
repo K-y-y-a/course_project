@@ -115,7 +115,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import Category from "/src/components/Category.vue"
     import MainNew from "/src/components/MainNew.vue"
     import NewsList from "/src/components/NewsList.vue"

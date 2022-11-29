@@ -124,7 +124,6 @@ export default createStore({
         },
 
         GET_CATEGORY_BY_ID: (state) => (id) => { 
-
             let category = state.categories.filter(o => o.id.indexOf(id) != -1);
             return category
         },

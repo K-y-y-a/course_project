@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import AuthorListItem from "/src/components/AuthorListItem.vue"
 
     export default {

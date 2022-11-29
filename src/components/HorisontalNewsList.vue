@@ -18,7 +18,7 @@
     </div>    
 </template>
 
-<script>
+<script lang="ts">
     import HorisontalNewsListItem from "/src/components/HorisontalNewsListItem.vue"
 
     export default {

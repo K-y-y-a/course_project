@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import NewsListItem from "/src/components/NewsListItem.vue"
 
     export default {

@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import CategoryItem from "/src/components/CategoryItem.vue"
     import { mapGetters, mapActions } from 'vuex'
 
