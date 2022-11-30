@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts">
+// весь неиспользуемый по проекту код лучше удалять
     export default {
         emits: ['onRemove'],
         props: {

@@ -21,7 +21,9 @@ export default createStore({
         
     },
     actions: {
+        // здесь определенно не хватает пагинации в твоих запросах к серверу по новостям
         GET_CATEGORIES_FROM_API({ commit }) {
+            // все обращения к апи надо вынести в отдельный класс и избежать дублирования между самими обращениями
             return axios('http://localhost:3000/categories', {
                 method: "GET"
             })
@@ -85,6 +87,7 @@ export default createStore({
             return formatResult
         },
         GET_AUTHOR_NEWS_RANGE: (state) => (begin, end) => {
+            // JSON метода друг друга исключают, не нужны в данном случае
             let result = JSON.parse(
                 JSON.stringify( 
                     state.authorNews.slice(begin, end) 

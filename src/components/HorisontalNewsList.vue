@@ -34,6 +34,7 @@
             }
         },
         methods: {
+          // дублирование с Category.vue, это надо избегать, выносить всё что дублируется в одно место
             scrollRight() {
                 let section = document.querySelector(".horisontal-news-list");
                 section.scrollLeft += 100;

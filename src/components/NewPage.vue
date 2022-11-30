@@ -79,10 +79,11 @@
             newTime() {
                 let datestring = this.getNew().date;
                 let date = datestring.slice(0, 10).split("-").reverse().join(".");
-                let time = datestring.slice(11, 16);
+                let time = datestring.slice(11, 16); // дублирование 11, 16 по проекту
                 let result = time + " " + date;
                 return result
             },
+          // .. эти computed - лишние, всё это можно сделать и в template
             newTitle() {
                 return this.getNew().title;
             },

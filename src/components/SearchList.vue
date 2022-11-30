@@ -30,6 +30,8 @@
         },
         methods: {
             getDate() {
+              // уже встречал полностью идентичный метод в коде, вместо дублирования
+              // корректнее вынести в отдельную функцию или полноценный компонент
                 let datestring = this.neww.date;
                 let date = datestring.slice(0, 10).split("-").reverse().join(".");
                 let time = datestring.slice(11, 16);
