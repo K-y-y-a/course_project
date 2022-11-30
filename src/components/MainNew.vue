@@ -35,10 +35,13 @@ import { isString } from '@vue/shared';
         },
         methods: {
             getDate() {
+              // 11,16 уже встречал в коде, дублирования надо избегать и выносить всё в отдельные фичи,
+              //     кроме того магических цифр надо избегать и давать им имена через переменные
                 if(isString(this.mainNew.date)) return this.mainNew.date.slice(11,16);
             }
         },
         computed: {
+          // это можно сделать и в <template> секции без computed
             linkOpen () {
                 return `/news/${this.mainNew.id}`;
             }

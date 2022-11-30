@@ -28,7 +28,8 @@
             ...mapGetters(['GET_CATEGORIES'])
         },
         methods: {
-            scrollRight() {
+             // эти фичи непосредствено к категории не имеют отношения, их надо делать в отдельной фиче
+             scrollRight() {
                 let section = document.querySelector(".category");
                 section.scrollLeft += 100;
             },

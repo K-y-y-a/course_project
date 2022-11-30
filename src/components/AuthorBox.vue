@@ -10,6 +10,7 @@
 <script lang="ts">
     export default {
         props: {
+          // neww -> опечатку переименовать
             neww: {
                 type: Object,
                 default() {
@@ -21,5 +22,8 @@
 </script>
 
 <style scoped>
-
+/*
+все стили из assets стоит по максимуму подключать в соответствующих компонентах,
+не надо их отдельно глобальными делать
+*/
 </style>

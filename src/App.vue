@@ -1,9 +1,9 @@
 <template>
 	<main class="layout">
 		<Nav></Nav>
-		<router-view></router-view>  
+		<router-view></router-view>
 		<!-- <Widgets></Widgets> -->
-	</main>	
+	</main>
 </template>
 
 <script lang="ts">
@@ -12,8 +12,9 @@
 
 	import { mapActions } from 'vuex'
 
-	const LIMIT_NEWS_ON_PAGE = 40;    
-    const LIMIT_AUTHOR_NEWS_ON_PAGE = 2;  
+  // прыгает форматирование, надо по всему репозиторию сделать автоформат по всем файлам, это легко гуглится
+	const LIMIT_NEWS_ON_PAGE = 40;
+    const LIMIT_AUTHOR_NEWS_ON_PAGE = 2;
 
 	export default {
 		name: 'App',
@@ -38,5 +39,5 @@
 </script>
 
 <style scoped>
-	
+
 </style>
