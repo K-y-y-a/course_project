@@ -15,6 +15,12 @@
     }
 }
 
+.search-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .search-list__link {
     display: flex;
 }
