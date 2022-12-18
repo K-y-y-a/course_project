@@ -2,58 +2,51 @@
     <div class="news__horisontal-news-list-box">
         <div class="news__horisontal-news-list horisontal-news-list">
             <HorisontalNewsListItem
-                v-for="news_item in news"
-                :key="news_item.id"
-                :news_item="news_item"
+                v-for="neww in news"
+                :key="neww.id"
+                :neww="neww"
             ></HorisontalNewsListItem>
+
 
             <div class="horisontal-news-list__void-box"></div>
 
             <div class="horisontal-news-list__button-block">
-                <button
-                    class="horisontal-news-list__button horisontal-news-list_button-left"
-                    @click="scrollLeft('.horisontal-news-list')"
-                >
-                    &lt;
-                </button>
-                <button
-                    class="horisontal-news-list__button horisontal-news-list_button-right"
-                    @click="scrollRight('.horisontal-news-list')"
-                >
-                    &gt;
-                </button>
+                <button class="horisontal-news-list__button horisontal-news-list_button-left" @click="scrollLeft">&lt;</button>
+                <button class="horisontal-news-list__button horisontal-news-list_button-right" @click="scrollRight">&gt;</button>
             </div>
         </div>
-    </div>
+    </div>    
 </template>
 
 <script lang="ts">
-import HorisontalNewsListItem from "/src/components/HorisontalNewsListItem.vue";
-import { scrollRight, scrollLeft } from "/src/scripts";
+    import HorisontalNewsListItem from "/src/components/HorisontalNewsListItem.vue"
 
-export default {
-    components: {
-        HorisontalNewsListItem,
-    },
-    props: {
-        news: {
-            type: Object,
-            default() {
-                return {};
+    export default {
+        components: {
+            HorisontalNewsListItem,
+        },
+        props: {
+            news: {
+                type: Object,
+                default() {
+                    return {}
+                },
+            }
+        },
+        methods: {
+          // дублирование с Category.vue, это надо избегать, выносить всё что дублируется в одно место
+            scrollRight() {
+                let section = document.querySelector(".horisontal-news-list");
+                section.scrollLeft += 100;
             },
-        },
-    },
-    methods: {
-        scrollRight(class_name: string) {
-            return scrollRight(class_name);
-        },
-        scrollLeft(class_name: string) {
-            return scrollLeft(class_name);
-        },
-    },
-};
+            scrollLeft() {
+                let section = document.querySelector(".horisontal-news-list");
+                section.scrollLeft -= 100;
+            }
+        }
+    }
 </script>
 
-<style lang="scss" scoped>
-@import "/src/assets/_horisontal-news-list.scss";
+<style scoped>
+
 </style>

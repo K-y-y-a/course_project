@@ -1,37 +1,29 @@
 <template>
     <div class="author-box__author-link-cell">
-        <span
-            class="author-box__author-photo"
-            v-bind:class="{ 'author-box_image-lagre': large }"
-        >
-            <img
-                class="author-box__author-image"
-                alt="Фотография автора"
-                v-bind:src="news_item.authorPhotoLink"
-            />
+        <span class="author-box__author-photo">
+            <img class="author-box__author-image" alt="Фотография автора" v-bind:src="neww.authorPhotoLink">
         </span>
-        <span class="author-box__author-name text-size_small">{{
-            news_item.author
-        }}</span>
+        <span class="author-box__author-name text-size_small">{{neww.author}}</span> 
     </div>
 </template>
 
 <script lang="ts">
-export default {
-    props: {
-        news_item: {
-            type: Object,
-            default() {
-                return {};
-            },
-        },
-        large: {
-            type: Boolean,
-        },
-    },
-};
+    export default {
+        props: {
+          // neww -> опечатку переименовать
+            neww: {
+                type: Object,
+                default() {
+                    return {}
+                },
+            }
+        }
+    }
 </script>
 
-<style lang="scss" scoped>
-@import "/src/assets/_author-box.scss";
+<style scoped>
+/*
+все стили из assets стоит по максимуму подключать в соответствующих компонентах,
+не надо их отдельно глобальными делать
+*/
 </style>

@@ -5,8 +5,7 @@ import SignIn from "/src/components/SignIn.vue";
 import Search from "/src/components/Search.vue";
 import NewPage from "/src/components/NewPage.vue";
 import CategoriesPage from "/src/components/CategoriesPage.vue";
-import NoData from "/src/components/NoData.vue"
-import PageNotFound from "/src/components/PageNotFound.vue"
+import Authors from "/src/components/Authors.vue";
 
 const routes = [
     {
@@ -27,7 +26,7 @@ const routes = [
     {
         path: "/search",
         name: "Search",
-        component: NoData, //Search,
+        component: Search,
     },
     {   
         path: '/news/:id',
@@ -37,14 +36,12 @@ const routes = [
     {   
         path: '/categories/:id',
         name: 'CategoriesPage',
-        component: NoData, //CategoriesPage 
+        component: CategoriesPage 
     },
     {   
-        path: '/:pathMatch(.*)*',
-        //name: "Main",
-        name: 'PageNotFound',
-        //component: Main,
-        component: PageNotFound,
+        path: '/authors/:id',
+        name: 'Authors',
+        component: Authors 
     },
 
 ];

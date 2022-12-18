@@ -9,46 +9,38 @@
         <div class="category__void-box"></div>
 
         <div class="category__button-block">
-            <button
-                class="category__button category_button-left"
-                @click="scrollLeft('.category')"
-            >
-                &lt;
-            </button>
-            <button
-                class="category__button category_button-right"
-                @click="scrollRight('.category')"
-            >
-                &gt;
-            </button>
+            <button class="category__button category_button-left" @click="scrollLeft">&lt;</button>
+            <button class="category__button category_button-right" @click="scrollRight">&gt;</button>
         </div>
+        
     </div>
 </template>
 
 <script lang="ts">
-import CategoryItem from "/src/components/CategoryItem.vue";
-import { mapGetters } from "vuex";
+    import CategoryItem from "/src/components/CategoryItem.vue"
+    import { mapGetters, mapActions } from 'vuex'
 
-import { scrollRight, scrollLeft } from "/src/scripts";
-
-export default {
-    components: {
-        CategoryItem,
-    },
-    computed: {
-        ...mapGetters(["GET_CATEGORIES"]),
-    },
-    methods: {
-        scrollRight(class_name: string) {
-            return scrollRight(class_name);
+    export default {
+        components: {
+            CategoryItem,
         },
-        scrollLeft(class_name: string) {
-            return scrollLeft(class_name);
+        computed: {
+            ...mapGetters(['GET_CATEGORIES'])
         },
-    },
-};
+        methods: {
+             // эти фичи непосредствено к категории не имеют отношения, их надо делать в отдельной фиче
+             scrollRight() {
+                let section = document.querySelector(".category");
+                section.scrollLeft += 100;
+            },
+            scrollLeft() {
+                let section = document.querySelector(".category");
+                section.scrollLeft -= 100;
+            }
+        }
+    }
 </script>
 
-<style lang="scss" scoped>
-@import "/src/assets/_category.scss";
+<style scoped>
+
 </style>
