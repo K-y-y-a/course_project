@@ -3,20 +3,23 @@
         <div class="new-page__page">
             <div class="new-page__time">
                 <span>
-                    {{newTime}}
+                    {{ this.getDate }}
                 </span>
             </div>
 
             <h1 class="new-page__title">
-                {{newTitle}}
+                {{ this.getNew().title }}
             </h1>
 
             <div class="new-page__new-image-box">
                 <div class="new-page__new-image">
-                    <img class="new-page__new-image-image" v-bind:src="newPhotoLink">
-                </div>        
+                    <img
+                        class="new-page__new-image-image"
+                        v-bind:src="this.getNew().photoLink"
+                    />
+                </div>
                 <span class="new-page__new-image-title">
-                    {{newPhotoDescription}}
+                    {{ this.getNew().photoDescription }}
                 </span>
             </div>
 
@@ -26,16 +29,13 @@
                     tag="button"
                     class="new-page__new-source"
                 >
-                    <AuthorBoxLarge
-                        :neww="neww"
-                    ></AuthorBoxLarge>
+                    <AuthorBox :news_item="news_item" :large="true"></AuthorBox>
                 </router-link>
             </div>
-            
 
             <div class="new-page__new-text-box">
                 <p class="new-page__new-text">
-                    {{newDescription}}
+                    {{ this.getNew().description }}
                 </p>
             </div>
         </div>
@@ -43,71 +43,54 @@
 </template>
 
 <script lang="ts">
-    import AuthorBoxLarge from "/src/components/AuthorBoxLarge.vue"
-    import { mapGetters } from 'vuex'
+import AuthorBox from "/src/components/AuthorBox.vue";
+import { mapGetters } from "vuex";
+import { getDate } from "/src/scripts";
 
-    export default {
-        components: {
-            AuthorBoxLarge
+export default {
+    components: {
+        AuthorBox,
+    },
+    data() {
+        return {
+            thereIsAuthor: true,
+        };
+    },
+    methods: {
+        showAuthorBox() {
+            return true;
         },
-        data() {
-            return {
-                thereIsAuthor: true,
+        getNewById(id) {
+            let news_item = this.GET_NEW_BY_ID(id);
+            if (news_item == undefined)
+                news_item = this.GET_AUTHOR_NEW_BY_ID(id);
+            return news_item;
+        },
+        getNew() {
+            return this.getNewById(this.$route.params.id);
+        },
+    },
+    computed: {
+        ...mapGetters(["GET_NEW_BY_ID", "GET_AUTHOR_NEW_BY_ID"]),
+        news_item() {
+            return this.getNewById(this.$route.params.id);
+        },
+        getDate() {
+            return getDate(this.getNew().date);
+        },
+        linkOpenAuthor() {
+            if (typeof this.getNew().authorId === "undefined") {
+                this.thereIsAuthor = false;
+                return "";
             }
+            return `/authors/${this.getNew().authorId}`;
         },
-        methods:{
-            showAuthorBox() {
-                return true
-            },
-            getNewById(id) {
-                let neww = this.GET_NEW_BY_ID(id)
-                if(neww == undefined) neww = this.GET_AUTHOR_NEW_BY_ID(id)
-                return neww
-            },
-            getNew() {
-                return this.getNewById(this.$route.params.id);               
-            },
-        },
-        computed: {
-            ...mapGetters([
-                'GET_NEW_BY_ID',
-                'GET_AUTHOR_NEW_BY_ID'
-            ]),
-            neww() {
-                return this.getNewById(this.$route.params.id);               
-            },
-            newTime() {
-                let datestring = this.getNew().date;
-                let date = datestring.slice(0, 10).split("-").reverse().join(".");
-                let time = datestring.slice(11, 16); // дублирование 11, 16 по проекту
-                let result = time + " " + date;
-                return result
-            },
-          // .. эти computed - лишние, всё это можно сделать и в template
-            newTitle() {
-                return this.getNew().title;
-            },
-            newPhotoLink() { 
-                return this.getNew().photoLink;
-            },
-            newDescription() {
-                return this.getNew().description;
-            },
-            newPhotoDescription() {
-                return this.getNew().photoDescription;
-            },
-            linkOpenAuthor () {
-                if(typeof this.getNew().authorId === 'undefined') 
-                { 
-                    this.thereIsAuthor = false;
-                    return "";
-                }
-                return `/authors/${this.getNew().authorId}`;
-            }
-        }
-    }
+    },
+};
 </script>
 
-<style>
+<style></style>
 
+<style lang="scss" scoped>
+@import "/src/assets/_new-page.scss";
 </style>

@@ -1,43 +1,50 @@
 <template>
-    <div class="news-list__item blocks-separator">
-        <router-link
-            :to="linkOpen"
-            tag="button"
-            class="news-list__link"
-        >
-            <span>{{neww.title}}</span>
+    <div class="news-list-item blocks-separator">
+        <router-link :to="linkOpen" tag="button" class="news-list-item__link">
+            <span>{{ news_item.title }}</span>
         </router-link>
 
-        <div class="news-list__info">
-            <div class="news-list__date text-size_small">{{getDate()}}</div>
-            <div class="news-list__share">Раздача</div>
+        <div class="news-list-item__info">
+            <div class="news-list-item__date text-size_small">
+                {{ getDate() }}
+            </div>
+            <ShareButton
+                class="news-list-item__share"
+                :route="linkOpen"
+            ></ShareButton>
         </div>
-    </div> 
+    </div>
 </template>
 
 <script lang="ts">
-    export default {
-        props: {
-            neww: {
-                type: Object,
-                default() {
-                    return {}
-                },
-            }
+import ShareButton from "/src/components/ShareButton.vue";
+import { getDate } from "/src/scripts";
+
+export default {
+    components: {
+        ShareButton,
+    },
+    props: {
+        news_item: {
+            type: Object,
+            default() {
+                return {};
+            },
         },
-        methods: {
-            getDate() {
-                return this.neww.date.slice(11,16);
-            }
+    },
+    methods: {
+        getDate() {
+            return getDate(this.news_item.date);
         },
-        computed: {
-            linkOpen () {
-                return `/news/${this.neww.id}`;
-            }
-        }
-    }
+    },
+    computed: {
+        linkOpen() {
+            return `/news/${this.news_item.id}`;
+        },
+    },
+};
 </script>
 
 <style scoped>
-
+@import "/src/assets/_news-list-item.scss";
 </style>

@@ -1,12 +1,15 @@
 import { createStore } from "vuex";
-import axios from "axios";
+import { Api } from "/src/vuex/api.ts"
+
+const NEWS_LIMIT = 40
 
 export default createStore({
     state: {
         categories: [],
         news: [],
         authorNews: [],
-        
+        searchNews: [],
+
     },
     mutations: {
         SET_CATEGORIES_FROM_STATE: (state, categories) => {
@@ -18,15 +21,14 @@ export default createStore({
         SET_AUTHOR_NEWS_FROM_STATE: (state, authorNews) => {
             state.authorNews = authorNews;
         },
-        
+        SET_SEARCH_NEWS_FROM_STATE: (state, params: {searchNews, page}) => {
+            if(params.page == 1) state.searchNews = [...params.searchNews];
+            else state.searchNews = [...state.searchNews, ...params.searchNews]
+        },  
     },
     actions: {
-        // здесь определенно не хватает пагинации в твоих запросах к серверу по новостям
         GET_CATEGORIES_FROM_API({ commit }) {
-            // все обращения к апи надо вынести в отдельный класс и избежать дублирования между самими обращениями
-            return axios('http://localhost:3000/categories', {
-                method: "GET"
-            })
+            Api.getCategories()
                 .then((categories) => {
                     commit('SET_CATEGORIES_FROM_STATE', categories.data);
                     return categories;
@@ -36,13 +38,8 @@ export default createStore({
                     return error;
                 })
         },
-        GET_NEWS_FROM_API({ commit }, limit) {
-            let url = new URL("http://localhost:3000/news?type=common&_sort=date&_order=desc");
-            url.searchParams.append('_limit', limit);
-
-            return axios(url.href, {
-                method: "GET"
-            })
+        GET_NEWS_FROM_API({ commit }, range: {start: number, end: number}) {
+            Api.getNews(range.start.toString(), range.end.toString())
                 .then((news) => {
                     commit('SET_NEWS_FROM_STATE', news.data);
                     return news;
@@ -52,13 +49,8 @@ export default createStore({
                     return error;
                 })
         },
-        GET_AUTHOR_NEWS_FROM_API({ commit }, limit) {
-            let url = new URL("http://localhost:3000/news?type=author&_sort=date&_order=desc");
-            url.searchParams.append('_limit', limit);
-
-            return axios(url.href, {
-                method: "GET"
-            })
+        GET_AUTHOR_NEWS_FROM_API({ commit }, range: {start: number, end: number}) {
+            Api.getAuthorNews(range.start.toString(), range.end.toString())
                 .then((authorNews) => {
                     commit('SET_AUTHOR_NEWS_FROM_STATE', authorNews.data);
                     return authorNews;
@@ -67,7 +59,29 @@ export default createStore({
                     console.log(error);
                     return error;
                 })
-        }
+        },
+        GET_SEARCH_NEWS_FROM_API({ commit }, params: {text: string, start: string, end: string, page: number}) {
+            Api.getNewByText(params.text, params.start, params.end)
+                .then((news) => {
+                    commit('SET_SEARCH_NEWS_FROM_STATE', {searchNews: news.data, page: params.page});
+                    return news;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
+        GET_CATEGORY_NEWS_FROM_API({ commit }, params: {category: string, start: string, end: string, page: number}) {
+            Api.getNewByCategory(params.category, params.start, params.end)
+                .then((news) => {
+                    commit('SET_SEARCH_NEWS_FROM_STATE', {searchNews: news.data, page: params.page});
+                    return news;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
     },
     getters: {
         GET_CATEGORIES(state) {
@@ -87,12 +101,7 @@ export default createStore({
             return formatResult
         },
         GET_AUTHOR_NEWS_RANGE: (state) => (begin, end) => {
-            // JSON метода друг друга исключают, не нужны в данном случае
-            let result = JSON.parse(
-                JSON.stringify( 
-                    state.authorNews.slice(begin, end) 
-                )
-            )
+            let result = state.authorNews.slice(begin, end) 
 
             let formatResult = Object.keys(result).map(key => {
                 return result[key];
@@ -106,16 +115,8 @@ export default createStore({
         GET_AUTHOR_NEW_BY_ID: (state) => (id) => {       
             return state.authorNews.find(o => o.id == id)
         },
-        GET_NEW_BY_TEXT: (state) => (text) => {    
-            let news1 = state.authorNews.filter(o => o.title.indexOf(text) != -1);
-            let news2 = state.authorNews.filter(o => o.description.indexOf(text) != -1);
-            let authorNews1 = state.news.filter(o => o.title.indexOf(text) != -1);
-            let authorNews2 = state.news.filter(o => o.description.indexOf(text) != -1);
-            
-            let news = [...new Set(news1.concat(news2))];
-            let authorNews = [...new Set(authorNews1.concat(authorNews2))];
-            let result = news.concat(authorNews);
-            return result
+        GET_SEARCH_NEWS_BY_TEXT: (state) => () => {   
+            return state.searchNews
         },
 
         GET_NEW_BY_CATEGORY: (state) => (category) => {    
@@ -126,13 +127,9 @@ export default createStore({
             return result
         },
 
-        GET_CATEGORY_BY_ID: (state) => (id) => { 
-            let category = state.categories.filter(o => o.id.indexOf(id) != -1);
+        GET_CATEGORY_BY_ID: (state) => (id: String) => {         
+            let category = state.categories.filter(o => o.id.indexOf(id) != -1);        
             return category
         },
-
-
-        
-
     },
 });
