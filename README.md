@@ -1,14 +1,16 @@
-# vue-project
+# Курсовой проект: Лента новостей
 
-This template should help get you started developing with Vue 3 in Vite.
+## Описание
 
-## Recommended IDE Setup
+Лента новостей с подгрузкой и комментариями.
+Дизайн: [РИА Новости](https://ria.ru)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Технологии
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+-   Vue.js
+-   HTML5
+-   JavaScript
+-   CSS
 
 ## Project Setup
 
