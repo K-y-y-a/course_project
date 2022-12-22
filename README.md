@@ -11,7 +11,7 @@
 -   HTML5
 -   JavaScript
 -   TypeScript
--   CSS
+-   SCSS
 
 ## Project Setup
 
