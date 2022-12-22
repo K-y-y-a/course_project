@@ -10,6 +10,7 @@
 -   Vue.js
 -   HTML5
 -   JavaScript
+-   TypeScript
 -   CSS
 
 ## Project Setup
