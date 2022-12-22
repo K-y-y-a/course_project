@@ -1,15 +1,15 @@
 <template>
-    <!--  сделал красиво, однако правильно всё таки делать разделение на блоки не через JS,-->
-    <!--  а через grid css, он с этим отлично справится без каких либо проблем,-->
-    <!--  а то получается много лишней js логики-->
     <div class="layout__main main">
         <Category></Category>
         <div class="main__news news">
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(0, 1)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(0, 1)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
+
             <NewsList :news="this.GET_NEWS_RANGE(1, 6)"></NewsList>
         </div>
 
@@ -29,11 +29,13 @@
                 <NewsList :news="this.GET_NEWS_RANGE(11, 16)"></NewsList>
             </div>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(16, 17)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(16, 17)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
             <NewsList :news="this.GET_NEWS_RANGE(17, 19)"></NewsList>
 
@@ -41,17 +43,21 @@
 
             <NewsList :news="this.GET_NEWS_RANGE(21, 23)"></NewsList>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(23, 24)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(23, 24)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(24, 25)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(24, 25)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
             <NewsList :news="this.GET_NEWS_RANGE(25, 27)"></NewsList>
         </div>
@@ -59,35 +65,45 @@
         <div class="main__news-4 news">
             <NewsList :news="this.GET_NEWS_RANGE(27, 29)"></NewsList>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(29, 30)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(29, 30)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(30, 31)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(29, 30)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(31, 32)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(29, 30)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(32, 33)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(29, 30)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
 
-            <MainNew
-                v-for="mainNew in GET_NEWS_RANGE(33, 34)"
-                :key="mainNew.id"
-                :mainNew="mainNew"
-            ></MainNew>
+            <NewBlock
+                class="news-list__new-block"
+                v-for="news_item in GET_NEWS_RANGE(29, 30)"
+                :key="news_item.id"
+                :news_item="news_item"
+                :blockSize="'main'"
+            ></NewBlock>
         </div>
 
         <div class="main__news-5 news">
@@ -95,12 +111,14 @@
                 :news="this.GET_NEWS_RANGE(34, 40)"
             ></HorisontalNewsList>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script lang="ts">
 import Category from "/src/components/Category.vue";
-import MainNew from "/src/components/MainNew.vue";
+import Footer from "/src/components/Footer.vue";
+import NewBlock from "/src/components/NewBlock.vue";
 import NewsList from "/src/components/NewsList.vue";
 import AuthorList from "/src/components/AuthorList.vue";
 import CategoryTypes from "/src/components/CategoryTypes.vue";
@@ -111,7 +129,8 @@ import { mapGetters, mapActions } from "vuex";
 export default {
     components: {
         Category,
-        MainNew,
+        Footer,
+        NewBlock,
         NewsList,
         AuthorList,
         CategoryTypes,

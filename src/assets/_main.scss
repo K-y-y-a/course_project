@@ -16,7 +16,27 @@
     }
 
     .main__news {
-        margin: 0 5px;
+        display: grid;
+        grid-gap: 10px;
+        margin: 5px;
+    }
+
+    .main__news-2 {
+        display: grid;
+        grid-gap: 10px;
+        margin: 5px;
+    }
+
+    .main__news-3 {
+        display: grid;
+        grid-gap: 10px;
+        margin: 5px;
+    }
+
+    .main__news-4 {
+        display: grid;
+        grid-gap: 10px;
+        margin: 5px;
     }
 }
 

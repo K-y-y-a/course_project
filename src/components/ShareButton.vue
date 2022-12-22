@@ -8,7 +8,14 @@
             &#10148;
         </button>
 
-        <div class="share-button__list" v-if="isSend">
+        <div
+            class="share-button__list"
+            v-bind:class="{
+                'share-button_list-expand-up': isExpandUp,
+                'share-button_list-expand-down': isExpandDown,
+            }"
+            v-if="isSend"
+        >
             <button class="share-button__list-item" v-on:click="sendTelegram">
                 <span class="share-button__list-item-title">Telegram</span>
                 <img
@@ -58,6 +65,12 @@ export default {
                 return {};
             },
         },
+        expandDirection: {
+            type: String,
+            default() {
+                return "down";
+            },
+        },
     },
     methods: {
         showLinks() {
@@ -83,6 +96,12 @@ export default {
                 "_blank",
                 "location=yes,height=570,width=520,scrollbars=yes,status=yes"
             );
+        },
+        isExpandUp() {
+            return this.expandDirection == "up" ? true : false;
+        },
+        isExpandDown() {
+            return this.expandDirection == "down" ? true : false;
         },
     },
 };

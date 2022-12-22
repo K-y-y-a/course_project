@@ -39,6 +39,31 @@
     line-height: 25px;
 }
 
+.new-page__chat {
+    margin: 0 auto;
+    height: 30px;
+    width: 200px;
+    background-color: var(--style-color);
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 16px 36px;
+    cursor: pointer;
+}
+
+.new-page__chat-img {
+    border-radius: 50%;
+}
+
+.new-page__chat-title {
+    color: var(--main-color);
+    font-family: var(--first-font);
+    font-size: 20px;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 746px) {
     .new-page__page {
         margin: 0 10px;

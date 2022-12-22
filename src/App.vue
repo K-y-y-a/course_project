@@ -2,14 +2,15 @@
     <main class="layout">
         <Nav></Nav>
         <router-view></router-view>
-        <Footer></Footer>
-        <!-- <Widgets></Widgets> -->
+        <Chat></Chat>
+        <!-- <NewForum></NewForum> -->
     </main>
 </template>
 
 <script lang="ts">
+import NewForum from "/src/components/NewForum.vue";
+import Chat from "/src/components/Chat.vue";
 import Nav from "/src/components/Nav.vue";
-import Footer from "/src/components/Footer.vue";
 
 import { mapActions } from "vuex";
 
@@ -19,8 +20,9 @@ const LIMIT_AUTHOR_NEWS_ON_PAGE = 2;
 export default {
     name: "App",
     components: {
+        NewForum,
+        Chat,
         Nav,
-        Footer,
     },
     methods: {
         ...mapActions([

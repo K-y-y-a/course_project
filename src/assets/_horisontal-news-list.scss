@@ -3,7 +3,6 @@
     flex-direction: row;
     margin: 0px -5px;
     padding-left: 5px;
-    overflow: scroll;
     height: 295px;
     background-color: var(--main-color);
 }
@@ -88,13 +87,20 @@
     .horisontal-news-list__button-block{
         display: none;
     }
+
+    .horisontal-news-list {
+        overflow: scroll;
+    }
 }
 
 @media screen and (min-width: 747px) and (max-width: 1420px) {
+    .horisontal-news-list {
+        overflow: hidden;
+    }
 
     .horisontal-news-list__void-box{
         display: block;
-        min-width: 80px;
+        min-width: 100px;
         height: 10px;
     }
 

@@ -9,7 +9,13 @@ export default createStore({
         news: [],
         authorNews: [],
         searchNews: [],
-
+        token: "",
+        nickName: "",
+        showChat: false,
+        showChatNew: false,
+        newComments: [],
+        thisChatId: "",
+        isExistsUser: true,
     },
     mutations: {
         SET_CATEGORIES_FROM_STATE: (state, categories) => {
@@ -25,6 +31,30 @@ export default createStore({
             if(params.page == 1) state.searchNews = [...params.searchNews];
             else state.searchNews = [...state.searchNews, ...params.searchNews]
         },  
+        SET_TOKEN: (state, token) => {
+            state.token = token;
+        },
+        SET_USER_NAME: (state, nickName) => {
+            state.nickName = nickName;
+        },  
+        SET_NEW_COMMENTS: (state, comments) => {
+            state.newComments = comments;
+        },  
+        ADD_NEW_COMMENTS: (state, comments) => {
+            state.newComments.push(comments);
+        },
+        SET_THIS_CHAT_ID: (state, id) => {
+            state.thisChatId = id;
+        }, 
+        SET_USER_EXISTS: (state, bool) => {
+            state.isExistsUser = bool;
+        }, 
+        SET_CHAT_STATE: (state, bool) => {
+            state.showChat = bool;
+        },  
+        SET_CHAT_NEW_STATE: (state, bool) => {
+            state.showChatNew = bool;
+        }, 
     },
     actions: {
         GET_CATEGORIES_FROM_API({ commit }) {
@@ -82,6 +112,129 @@ export default createStore({
                     return error;
                 })
         },
+        ADD_NEW_USER({ commit }, params: {login: string, password: string, nickName: string}) {
+            Api.getUserToken(params.login, params.password)
+                .then((user) => {
+                    if(user.data.length > 0) {
+                        commit('SET_TOKEN', "user exists");
+                        return
+                    }
+                    
+                    Api.setNewUser(params.login, params.password, params.nickName)
+                        .then((user) => {
+                            commit('SET_TOKEN', user.data.token);
+                            commit('SET_USER_NAME', user.data.nickName);
+                            return;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return error;
+                        })
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+
+        },
+        GET_USER_TOKEN_FROM_API({ commit }, params: {login: string, password: string}) {
+            Api.getUserToken(params.login, params.password)
+                .then((user) => {
+                    commit('SET_TOKEN', user.data.pop().token);
+                    return;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
+        GET_USER_NAME_FROM_API({ commit }, params: {login: string, password: string}) {
+            Api.getUserToken(params.login, params.password)
+                .then((user) => {
+                    commit('SET_USER_NAME', user.data.pop().nickName);
+                    return;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
+        GET_THIS_CHAT_COMMENTS_FROM_API({ commit }, id: string) {
+            Api.getThisChatComments(id)
+                .then((comments) => {
+                    commit('SET_THIS_CHAT_COMMENT', comments.data);
+                    return;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
+        CLEAR_TOKEN({ commit }) {
+            commit('SET_TOKEN', "");
+            return;
+        },
+        CLEAR_USER_NAME({ commit }) {
+            commit('SET_USER_NAME', "");
+            return;
+        },
+        GET_NEW_COMMENTS_FROM_API({ commit }, id) {
+            Api.getNewComments(id)
+                .then((comments) => {
+                    //console.log(comments.data)
+                    commit('SET_NEW_COMMENTS', comments.data);
+                    return;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+        },
+        ADD_THIS_CHAT_ID({ commit }, id) {
+            commit('SET_THIS_CHAT_ID', id);
+            return;
+        },
+        ADD_NEW_COMMENT({ commit }, comment) {
+            Api.getUserByToken(this.state.token)
+                .then((user) => {
+                    if(user.data.length > 0) {
+                        let userData = user.data.pop();
+                        userData.comment = comment;
+                        userData.date = new Date();
+                        userData.chatId = this.state.thisChatId;
+                        Api.addNewComment(userData)
+                            .then((comment) => {                
+                                commit('ADD_NEW_COMMENTS', comment.data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return error;
+                            })
+                    } else {
+                        commit('SET_USER_EXISTS', false);
+                    }
+                    return;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
+            return;
+        },
+        CHANGE_USER_EXISTS({ commit }, bool) {
+            commit('SET_USER_EXISTS', bool);
+            return;
+        },
+
+        CHANGE_CHAT_STATE({ commit }, bool) {
+            commit('SET_CHAT_STATE', bool);
+            return;
+        },
+
+        CHANGE_CHAT_NEW_STATE({ commit }, bool) {
+            commit('SET_CHAT_NEW_STATE', bool);
+            return;
+        },
     },
     getters: {
         GET_CATEGORIES(state) {
@@ -130,6 +283,34 @@ export default createStore({
         GET_CATEGORY_BY_ID: (state) => (id: String) => {         
             let category = state.categories.filter(o => o.id.indexOf(id) != -1);        
             return category
+        },
+
+        GET_USER_TOKEN: (state) => () => {                 
+            return state.token;
+        },
+
+        GET_USER_NAME: (state) => () => {                 
+            return state.nickName;
+        },
+
+        GET_NEW_COMMENTS: (state) => () => {                 
+            return state.newComments;
+        },
+
+        GET_USER_EXISTS: (state) => () => {                 
+            return state.isExistsUser;
+        },
+
+        GET_CHAT_STATE: (state) => () => {                 
+            return state.showChat;
+        },
+
+        GET_CHAT_NEW_STATE: (state) => () => {                 
+            return state.showChatNew;
+        },
+
+        GET_THIS_CHAT_ID: (state) => () => {                 
+            return state.thisChatId;
         },
     },
 });

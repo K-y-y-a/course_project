@@ -1,0 +1,209 @@
+.chats {
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    right: 0;
+    height: calc(100% - 60px);
+    background-color: var(--main-color);
+    z-index: 899;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, .2);
+    margin-top: 60px;
+}
+
+.chats::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+.chats::-webkit-scrollbar-thumb {
+    background-color: var(--other-color-2);
+    border-radius: 10px;
+}
+
+.chats__title {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    background-color: var(--style-color);
+    color: var(--main-color);
+    font-size: 20px;
+    font-family: var(--first-font);
+    font-weight: bold;
+    height: 60px;
+    z-index: 999;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .2);
+
+}
+
+.chats__close-button {
+    width: 40px;
+    padding: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chats-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-new {
+    position: relative;
+    padding: 10px;
+    font-family: var(--first-font);
+    font-size: 14px;
+    
+    font-weight: 600;
+    word-wrap: break-word;
+    line-height: 1.35;
+    cursor: pointer;
+}
+
+.chat-new__title-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chat-new__new-photo {
+    display: block;
+}
+
+.chat-new__new-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.chat-new__new-title {
+    color: var(--opposite-color);
+}
+
+.chat-new__date {
+    color: var(--other-color);
+}
+
+.new-forum__chat-message {
+    text-align: center;
+    padding: 10px;
+}
+
+.new-forum__chat-message-block {
+    height: 100%;
+}
+
+.new-forum {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: var(--first-font);
+    font-size: 16px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.new-forum__text {
+    resize: none;
+    padding: 5px;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.new-forum__comment {
+}
+
+.new-forum__comment-area {
+    background-color: var(--background-color);
+    border-radius: 20px 20px 20px 0;
+    padding: 10px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.new-forum__comment-text {
+    word-wrap: break-word;
+}
+
+.new-forum__comment-date {
+    font-size: 12px;
+    font-family: var(--secont-font);
+}
+
+.new-forum__comment-nickName {
+    color: var(--opposite-color);
+    font-family: var(--secont-font);
+    font-weight: bold;
+    padding: 5px;
+}
+
+
+.chats__error-message {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--opposite-color);
+    color: var(--main-color);
+    font-family: var(--first-font);
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+    box-sizing: border-box;
+    position: fixed;
+    right: 0;
+    height: calc(100% - 60px);
+    top: 60px;
+    z-index: 898;
+}
+
+.chats__error-message-button {
+    background-color: var(--main-color);
+    border: 0;
+    font-family: var(--first-font);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.new-forum__submit {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    color: var(--style-color);
+    background-color: var(--main-color);
+    border: 0;
+    border-radius: 100%;
+    line-height: 35px;
+    margin: 5px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, .2);
+}
+
+.new-forum__input-field {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    background-color: var(--background-color);
+    padding: 5px 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .2);
+    z-index: 900;
+}
+
+@media screen and (max-width: 746px) {
+    .chats, .chats__title, .new-forum__input-field, .chats__error-message {
+        width: 100%;
+    }    
+}
+
+@media screen and (min-width: 747px) {
+    .chats, .chats__title, .new-forum__input-field, .chats__error-message {
+        width: 35%;
+    }
+}

@@ -1,0 +1,45 @@
+.sign-in {
+    font-family: var(--first-font);
+    font-size: 24px;
+}
+
+.sign-in {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in__input {
+    margin: 5px;
+    border: 0;
+    width: 400px;
+    border-radius: 1px;
+
+    line-height: 36px;
+    text-align: center;
+
+    outline-color: #8a8a8a;
+}
+
+.sign-in__button {
+    margin: 5px;
+    border: 0;
+    width: 400px;
+    border-radius: 5px;
+    line-height: 36px;
+    padding: 0 30px;
+}
+
+.sign-in_button-complete {
+    background-color: #00ff00;
+}
+
+.sign-in_button-incomplete {
+    background-color: #ddd;
+}
+
+.sign-in__to-sign-up {
+    margin-top: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}

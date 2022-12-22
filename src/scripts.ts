@@ -20,8 +20,12 @@ export function getDate(newDate: string){
     let now = new Date();
     let date = new Date(newDate);
 
+    let minutes = date.getMinutes().toString();
+
+    if(minutes.length == 1) minutes = "0" + minutes;
+
     let dateString = [
-        date.getHours().toString() + ":" + date.getMinutes().toString(),
+        date.getHours().toString() + ":" + minutes,
     ]
 
     if (

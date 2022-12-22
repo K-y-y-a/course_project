@@ -38,13 +38,22 @@
                     {{ this.getNew().description }}
                 </p>
             </div>
+
+            <div class="new-page__chat" v-on:click="openChat(this.getNew().id)">
+                <img
+                    class="new-page__chat-img"
+                    alt="Логин"
+                    src="/assets/images/logo/chat-ria.png"
+                />
+                <span class="new-page__chat-title">{{ chatMessage }}</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import AuthorBox from "/src/components/AuthorBox.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { getDate } from "/src/scripts";
 
 export default {
@@ -54,9 +63,15 @@ export default {
     data() {
         return {
             thereIsAuthor: true,
+            chatMessage: "Обсудить",
         };
     },
     methods: {
+        ...mapActions([
+            "ADD_THIS_CHAT_ID",
+            "CHANGE_CHAT_STATE",
+            "CHANGE_CHAT_NEW_STATE",
+        ]),
         showAuthorBox() {
             return true;
         },
@@ -69,9 +84,19 @@ export default {
         getNew() {
             return this.getNewById(this.$route.params.id);
         },
+        openChat(id) {
+            console.log(id);
+            this.ADD_THIS_CHAT_ID(id);
+            this.CHANGE_CHAT_STATE(true);
+            this.CHANGE_CHAT_NEW_STATE(true);
+        },
     },
     computed: {
-        ...mapGetters(["GET_NEW_BY_ID", "GET_AUTHOR_NEW_BY_ID"]),
+        ...mapGetters([
+            "GET_NEW_BY_ID",
+            "GET_AUTHOR_NEW_BY_ID",
+            "GET_CHAT_NEW_STATE",
+        ]),
         news_item() {
             return this.getNewById(this.$route.params.id);
         },

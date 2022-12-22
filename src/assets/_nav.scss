@@ -11,6 +11,25 @@
     box-shadow: rgb(32 33 36 / 28%) 0px 1px 6px;
 }
 
+.nav__user-name {
+    white-space: nowrap;
+    display: block;
+    font-family: var(--first-font);
+    font-weight: bold;
+    font-size: 20px;
+    padding: 2px 4px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav__user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
 .nav__menu {
     display: flex;
     justify-content: space-between;

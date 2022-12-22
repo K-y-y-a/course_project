@@ -54,8 +54,6 @@
     z-index: 1;
 }
 
-
-
 .news__category-title {
     background-color: var(--main-color);
     padding: 20px 20px 0;
@@ -96,18 +94,6 @@
             height: 100%;
             background: linear-gradient(180deg, #00000000, #000000a0);
         }
-    }
-
-    .news__news-list {
-        margin-top: 10px;
-    }
-
-    .news__author-list {
-        margin-top: 10px;
-    }
-
-    .news {
-        margin: 0 5px;
     }
 }
 

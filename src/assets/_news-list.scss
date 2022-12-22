@@ -1,4 +1,4 @@
-.news-list__news-list-item {
+.news-list__new-block {
     position: relative;
     width: 100%;
     background-color: var(--main-color);
@@ -9,7 +9,6 @@
     .news-list {
         display: flex;
         flex-direction: column;
-        margin: 0px 0px 10px;
     }
 }
 
@@ -20,7 +19,7 @@
         flex-direction: column;
     }
 
-    .news-list__news-list-item {
+    .news-list__new-block {
         flex:1;
     }
 }

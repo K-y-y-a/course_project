@@ -1,11 +1,13 @@
 <template>
     <div class="news__horisontal-news-list-box">
         <div class="news__horisontal-news-list horisontal-news-list">
-            <HorisontalNewsListItem
+            <NewBlock
+                class="news-list__new-block"
                 v-for="news_item in news"
                 :key="news_item.id"
                 :news_item="news_item"
-            ></HorisontalNewsListItem>
+                :blockSize="'horizontal'"
+            ></NewBlock>
 
             <div class="horisontal-news-list__void-box"></div>
 
@@ -28,12 +30,12 @@
 </template>
 
 <script lang="ts">
-import HorisontalNewsListItem from "/src/components/HorisontalNewsListItem.vue";
+import NewBlock from "/src/components/NewBlock.vue";
 import { scrollRight, scrollLeft } from "/src/scripts";
 
 export default {
     components: {
-        HorisontalNewsListItem,
+        NewBlock,
     },
     props: {
         news: {

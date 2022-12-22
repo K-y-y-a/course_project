@@ -1,20 +1,20 @@
 <template>
     <div class="news__news-list news-list">
-        <NewsListItem
-            class="news-list__news-list-item"
+        <NewBlock
+            class="news-list__new-block"
             v-for="news_item in news"
             :key="news_item.id"
             :news_item="news_item"
-        ></NewsListItem>
+        ></NewBlock>
     </div>
 </template>
 
 <script lang="ts">
-import NewsListItem from "/src/components/NewsListItem.vue";
+import NewBlock from "/src/components/NewBlock.vue";
 
 export default {
     components: {
-        NewsListItem,
+        NewBlock,
     },
     props: {
         news: {

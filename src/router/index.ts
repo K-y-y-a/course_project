@@ -1,10 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Main from "/src/components/Main.vue";
-import SignUp from "/src/components/SignUp.vue";
-import SignIn from "/src/components/SignIn.vue";
-import Search from "/src/components/Search.vue";
+import SignPage from "/src/components/SignPage.vue";
 import NewPage from "/src/components/NewPage.vue";
-import CategoriesPage from "/src/components/CategoriesPage.vue";
 import NoData from "/src/components/NoData.vue"
 import PageNotFound from "/src/components/PageNotFound.vue"
 
@@ -15,14 +12,14 @@ const routes = [
         component: Main,
     },
     {
-        path: "/signup",
+        path: "/sign-up",
         name: "SignUp",
-        component: SignUp,
+        component: SignPage,
     },
     {
-        path: "/signin",
+        path: "/sign-in",
         name: "SignIN",
-        component: SignIn,
+        component: SignPage,
     },
     {
         path: "/search",
